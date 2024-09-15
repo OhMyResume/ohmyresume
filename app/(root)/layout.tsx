@@ -1,13 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import {
   IconArrowLeft,
   IconBrandTabler,
   IconSettings,
   IconUserBolt,
+  IconLogout,
+  IconMessages,
+  IconTemplate,
 } from "@tabler/icons-react";
 import Image from "next/image";
+import ChatWindow from "@/components/ui/chat-window";
 
 export const Layout = ({
   children,
@@ -15,20 +19,36 @@ export const Layout = ({
   children: React.ReactNode;
 }>) => {
   const [open, setOpen] = useState(false);
+  const [chatopen, setchatopen] = useState(false);
+  const [isanimating, setisanimating] = useState(true);
+
+  useEffect(() => {
+    if (chatopen) {
+      setisanimating(false);
+    } else {
+      setisanimating(true);
+    }
+  }, [chatopen]);
 
   const links = [
+    //chat
     {
-      label: "Dashboard",
+      label: "Chat",
       href: "#",
       icon: (
-        <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconMessages
+          onClick={() => {
+            setchatopen(true);
+          }}
+          className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0"
+        />
       ),
     },
     {
-      label: "Profile",
+      label: "Template",
       href: "#",
       icon: (
-        <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconTemplate className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
@@ -38,20 +58,13 @@ export const Layout = ({
         <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
-    {
-      label: "Logout",
-      href: "#",
-      icon: (
-        <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
-    },
   ];
 
   return (
     <main className="min-h-screen flex max-sm:flex-col">
-      <Sidebar open={open} setOpen={setOpen} animate={true}>
+      <Sidebar open={open} setOpen={setOpen} animate={isanimating}>
         <SidebarBody className="justify-between gap-10 h-screen">
-          <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+          <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden py-2">
             <>
               <Image
                 src={"/images/omr_logo.png"}
@@ -60,13 +73,17 @@ export const Layout = ({
                 height={50}
               ></Image>
             </>
-            <div className="mt-8 flex flex-col gap-2">
-              {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
-            </div>
+            {!chatopen ? (
+              <div className="mt-8 flex flex-col gap-2">
+                {links.map((link, idx) => (
+                  <SidebarLink key={idx} link={link} />
+                ))}
+              </div>
+            ) : (
+              <ChatWindow setOpen={setchatopen} />
+            )}
           </div>
-          <div>
+          {/* <div>
             <SidebarLink
               link={{
                 label: "User name",
@@ -81,10 +98,10 @@ export const Layout = ({
                 ),
               }}
             />
-          </div>
+          </div> */}
         </SidebarBody>
       </Sidebar>
-      {children}
+      <div className="overflow-y-scroll h-screen w-full">{children}</div>
     </main>
   );
 };
