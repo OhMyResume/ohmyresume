@@ -1,19 +1,12 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
-import {
-  IconArrowLeft,
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
-  IconLogout,
-  IconMessages,
-  IconTemplate,
-} from "@tabler/icons-react";
+import { IconMessages, IconTemplate, IconEdit } from "@tabler/icons-react";
 import Image from "next/image";
 import ChatWindow from "@/components/ui/chat-window";
 import { TemplatePreview } from "@/components/ui/template-preview";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Edit } from "@/components/ui/edit";
 
 export const Layout = ({
   children,
@@ -23,14 +16,15 @@ export const Layout = ({
   const [open, setOpen] = useState(false);
   const [chatopen, setchatopen] = useState(false);
   const [isanimating, setisanimating] = useState(true);
+  const [isEditOpen, setisEditOpen] = useState(false);
 
   useEffect(() => {
-    if (chatopen) {
+    if (chatopen || isEditOpen) {
       setisanimating(false);
     } else {
       setisanimating(true);
     }
-  }, [chatopen]);
+  }, [chatopen, isEditOpen]);
 
   const links = [
     //chat
@@ -56,10 +50,15 @@ export const Layout = ({
       ),
     },
     {
-      label: "Settings",
+      label: "Edit",
       href: "#",
       icon: (
-        <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconEdit
+          onClick={() => {
+            setisEditOpen(!isEditOpen);
+          }}
+          className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0"
+        />
       ),
     },
   ];
@@ -77,14 +76,16 @@ export const Layout = ({
                 height={50}
               ></Image>
             </>
-            {!chatopen ? (
+            {!chatopen && !isEditOpen ? (
               <div className="mt-8 flex flex-col gap-2">
                 {links.map((link, idx) => (
                   <SidebarLink key={idx} link={link} />
                 ))}
               </div>
-            ) : (
+            ) : chatopen ? (
               <ChatWindow setOpen={setchatopen} />
+            ) : (
+              <Edit setOpen={setisEditOpen} />
             )}
           </div>
           {/* <div>
