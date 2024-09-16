@@ -12,6 +12,8 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import ChatWindow from "@/components/ui/chat-window";
+import { TemplatePreview } from "@/components/ui/template-preview";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const Layout = ({
   children,
@@ -48,7 +50,9 @@ export const Layout = ({
       label: "Template",
       href: "#",
       icon: (
-        <IconTemplate className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <TemplatePreview>
+          <IconTemplate className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        </TemplatePreview>
       ),
     },
     {
@@ -101,7 +105,9 @@ export const Layout = ({
           </div> */}
         </SidebarBody>
       </Sidebar>
-      <div className="overflow-y-scroll h-screen w-full">{children}</div>
+      <ScrollArea className="overflow-y-scroll h-screen w-full">
+        {children}
+      </ScrollArea>
     </main>
   );
 };

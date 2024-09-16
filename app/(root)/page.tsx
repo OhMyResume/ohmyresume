@@ -1,5 +1,6 @@
 import React from "react";
 import Template1 from "@/components/resumes/template1";
+import Template2 from "@/components/resumes/template2";
 
 export const Page = () => {
   return (
