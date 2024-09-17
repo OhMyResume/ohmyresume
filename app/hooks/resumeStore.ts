@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 type Store = {
   userData: UserDataProps;
-  //   inc: () => void;
+  updateUserData: (key: keyof UserDataProps, value: any) => void;
 };
 
 const defaultUserData: UserDataProps = {
@@ -49,5 +49,11 @@ const defaultUserData: UserDataProps = {
 
 export const useUserDataStore = create<Store>()((set) => ({
   userData: defaultUserData,
-  //   inc: () => set((state) => ({ userData: state.userData + 1 })),
+  updateUserData: (key: keyof UserDataProps, value: any) =>
+    set((state) => ({
+      userData: {
+        ...state.userData,
+        [key]: value, // Dynamically update the key
+      },
+    })),
 }));

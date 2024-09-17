@@ -1,297 +1,164 @@
+"use client";
+import { useUserDataStore } from "@/app/hooks/resumeStore";
+import { Skeleton } from "../ui/skeleton";
 import React from "react";
 
-const Template3 = () => (
-  <svg
-    width="800"
-    height="1100"
-    viewBox="0 0 800 1100"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect width="100%" height="100%" fill="#ffffff" />
+const Template3 = () => {
+  const { userData } = useUserDataStore();
 
-    {/* Header */}
-    <text
-      x="40"
-      y="50"
-      fontSize="24"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      John Smith
-    </text>
+  return (
+    <div className="w-[800px] bg-white p-8">
+      {/* Header */}
+      <div className="text-2xl font-bold mb-4">
+        {userData.name ? userData.name : <Skeleton className="h-6 w-64" />}
+      </div>
 
-    {/* Contact Info */}
-    <g fontSize="12" fontFamily="Arial, sans-serif" fill="#000000">
-      <text x="40" y="80">
-        GitHub: github.com/vishakh-abahayan
-      </text>
-      <text x="40" y="100">
-        LinkedIn: linkedin.com/vishakh-abahayan
-      </text>
-      <text x="40" y="120">
-        Website: vishakhabahayan.com
-      </text>
-      <text x="40" y="140">
-        Email: hey@vishakhabhayan.com
-      </text>
-      <text x="40" y="160">
-        Phone: +919999999999
-      </text>
-    </g>
+      {/* Contact Info */}
+      <div className="text-sm space-y-2 mb-8">
+        <p>GitHub: github.com/vishakh-abahayan</p>
+        <p>LinkedIn: linkedin.com/vishakh-abahayan</p>
+        <p>Website: vishakhabahayan.com</p>
+        <p>Email: hey@vishakhabhayan.com</p>
+        <p>Phone: +919999999999</p>
+      </div>
 
-    {/* About */}
-    <text
-      x="40"
-      y="200"
-      fontSize="16"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      About
-    </text>
-    <text
-      x="40"
-      y="220"
-      fontSize="12"
-      fontFamily="Arial, sans-serif"
-      width="720"
-    >
-      <tspan x="40" dy="0">
-        An emerging technologist and indie hacker, known for creating simple yet
-        powerful tools that enhance
-      </tspan>
-      <tspan x="40" dy="15">
-        productivity and efficiency. With a background in full-stack
-        development, And a passion for developing
-      </tspan>
-      <tspan x="40" dy="15">
-        innovative solutions that address real-world problems.
-      </tspan>
-    </text>
+      {/* About */}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-2">About</h2>
+        <p className="text-sm">
+          {userData.about ? userData.about : <Skeleton className="h-12 w-80" />}
+        </p>
+      </div>
 
-    {/* Experience */}
-    <text
-      x="40"
-      y="280"
-      fontSize="16"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      Experience
-    </text>
+      {/* Experience */}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-4">Experience</h2>
 
-    <text
-      x="40"
-      y="300"
-      fontSize="14"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      Software Engineer, Microsoft
-    </text>
-    <text
-      x="700"
-      y="300"
-      fontSize="12"
-      fontFamily="Arial, sans-serif"
-      textAnchor="end"
-    >
-      Jun. 2021 – Present
-    </text>
-    <text x="60" y="320" fontSize="12" fontFamily="Arial, sans-serif">
-      <tspan x="60" dy="0">
-        • Developed permissions management on dashboards and reports for all
-        users on PowerBI
-      </tspan>
-      <tspan x="60" dy="15">
-        • Integrated Easy Sharing to share reports on Microsoft Teams to
-        increase consumer product usage by 15%
-      </tspan>
-      <tspan x="60" dy="15">
-        • Implemented Report data snapshots to share report views with other
-        users to address #1 requested feature
-      </tspan>
-      <tspan x="60" dy="15">
-        • Led user experience decision making for date parsing and Easy Sharing
-        error messaging
-      </tspan>
-      <tspan x="60" dy="15">
-        • Maintained consistent permission handling regarding folder roles,
-        individual roles, and organization roles
-      </tspan>
-    </text>
+        <div className="flex justify-between mb-2">
+          <h3 className="text-base font-bold">Software Engineer, Microsoft</h3>
+          <span className="text-sm">Jun. 2021 – Present</span>
+        </div>
+        <ul className="text-sm list-disc list-inside space-y-1">
+          <li>
+            Developed permissions management on dashboards and reports for all
+            users on PowerBI.
+          </li>
+          <li>
+            Integrated Easy Sharing to share reports on Microsoft Teams,
+            increasing usage by 15%.
+          </li>
+          <li>
+            Implemented Report data snapshots to share report views, addressing
+            the #1 requested feature.
+          </li>
+          <li>
+            Led user experience decision making for date parsing and Easy
+            Sharing error messaging.
+          </li>
+          <li>
+            Maintained consistent permission handling regarding folder roles,
+            individual roles, and organization roles.
+          </li>
+        </ul>
 
-    <text
-      x="40"
-      y="420"
-      fontSize="14"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      Software Development Engineer, Amazon.com
-    </text>
-    <text
-      x="700"
-      y="420"
-      fontSize="12"
-      fontFamily="Arial, sans-serif"
-      textAnchor="end"
-    >
-      Mar. 2020 – May 2021
-    </text>
-    <text x="60" y="440" fontSize="12" fontFamily="Arial, sans-serif">
-      <tspan x="60" dy="0">
-        • Developed Amazon checkout and payment services to handle traffic of 10
-        Million daily global transactions
-      </tspan>
-      <tspan x="60" dy="15">
-        • Integrated Iframes for credit cards and bank accounts to secure 80% of
-        all consumer traffic and prevent CSRF,
-      </tspan>
-      <tspan x="60" dy="15">
-        {" "}
-        cross-site scripting, and cookie-jacking
-      </tspan>
-      <tspan x="60" dy="15">
-        • Led Your Transactions implementation for JavaScript front-end
-        framework to showcase consumer transactions
-      </tspan>
-      <tspan x="60" dy="15">
-        {" "}
-        and reduce call center costs by $25 Million
-      </tspan>
-      <tspan x="60" dy="15">
-        • Recovered Saudi Arabia checkout failure impacting 4000+ customers due
-        to incorrect GET form redirection
-      </tspan>
-    </text>
+        <div className="flex justify-between mt-6 mb-2">
+          <h3 className="text-base font-bold">
+            Software Development Engineer, Amazon.com
+          </h3>
+          <span className="text-sm">Mar. 2020 – May 2021</span>
+        </div>
+        <ul className="text-sm list-disc list-inside space-y-1">
+          <li>
+            Developed Amazon checkout and payment services to handle 10 Million
+            daily global transactions.
+          </li>
+          <li>
+            Integrated Iframes for credit cards and bank accounts, securing 80%
+            of traffic from CSRF attacks.
+          </li>
+          <li>
+            Led Your Transactions implementation for showcasing consumer
+            transactions and reducing costs by $25 Million.
+          </li>
+          <li>
+            Recovered Saudi Arabia checkout failure impacting 4000+ customers
+            due to incorrect form redirection.
+          </li>
+        </ul>
+      </div>
 
-    {/* Projects */}
-    <text
-      x="40"
-      y="540"
-      fontSize="16"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      Projects
-    </text>
+      {/* Projects */}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-4">Projects</h2>
 
-    <text
-      x="40"
-      y="560"
-      fontSize="14"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      NinjaPrep.io (React)
-    </text>
-    <text x="60" y="580" fontSize="12" fontFamily="Arial, sans-serif">
-      <tspan x="60" dy="0">
-        • Platform to offer coding problem practice with built-in code editor
-        and written + video solutions in React
-      </tspan>
-      <tspan x="60" dy="15">
-        • Utilized Nginx to reverse proxy IP address on Digital Ocean hosts
-      </tspan>
-      <tspan x="60" dy="15">
-        • Developed using Styled-Components for 95% CSS styling to ensure proper
-        CSS scoping
-      </tspan>
-      <tspan x="60" dy="15">
-        • Implemented Docker with Seccomp to safely run user-submitted code with
-        &lt;2.2s runtime
-      </tspan>
-    </text>
+        <div className="mb-2">
+          <h3 className="text-base font-bold">NinjaPrep.io (React)</h3>
+          <ul className="text-sm list-disc list-inside space-y-1">
+            <li>
+              Platform for coding practice with built-in code editor and
+              solutions in React.
+            </li>
+            <li>
+              Utilized Nginx to reverse proxy IP addresses on Digital Ocean
+              hosts.
+            </li>
+            <li>
+              Developed using Styled-Components for 95% CSS styling ensuring
+              proper scoping.
+            </li>
+            <li>
+              Implemented Docker to run user-submitted code with less than 2.2s
+              runtime.
+            </li>
+          </ul>
+        </div>
 
-    <text
-      x="40"
-      y="660"
-      fontSize="14"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      HeatMap (JavaScript)
-    </text>
-    <text x="60" y="680" fontSize="12" fontFamily="Arial, sans-serif">
-      <tspan x="60" dy="0">
-        • Visualized Google Takeout location data of location history using
-        Google Maps API and Google Maps heatmap
-      </tspan>
-      <tspan x="60" dy="15">
-        {" "}
-        code with React
-      </tspan>
-      <tspan x="60" dy="15">
-        • Included local file system storage to reliably handle 5mb of location
-        history data
-      </tspan>
-      <tspan x="60" dy="15">
-        • Implemented Express to include routing between pages and jQuery to
-        parse Google Map and implement
-      </tspan>
-      <tspan x="60" dy="15">
-        {" "}
-        heatmap overlay
-      </tspan>
-    </text>
+        <div className="mb-2">
+          <h3 className="text-base font-bold">HeatMap (JavaScript)</h3>
+          <ul className="text-sm list-disc list-inside space-y-1">
+            <li>
+              Visualized Google Takeout location data using Google Maps API and
+              heatmap code.
+            </li>
+            <li>
+              Handled 5mb of location history data reliably using local file
+              system storage.
+            </li>
+            <li>
+              Implemented Express routing and jQuery to parse Google Map and
+              implement heatmap overlay.
+            </li>
+          </ul>
+        </div>
+      </div>
 
-    {/* Education */}
-    <text
-      x="40"
-      y="780"
-      fontSize="16"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      Education
-    </text>
+      {/* Education */}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-4">Education</h2>
 
-    <text
-      x="40"
-      y="800"
-      fontSize="14"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      New York University, College of Arts and Sciences
-    </text>
-    <text
-      x="700"
-      y="800"
-      fontSize="12"
-      fontFamily="Arial, sans-serif"
-      textAnchor="end"
-    >
-      Aug. 2019
-    </text>
-    <text x="40" y="820" fontSize="12" fontFamily="Arial, sans-serif">
-      Bachelor of Arts in Computer Science
-    </text>
-    <text x="60" y="840" fontSize="12" fontFamily="Arial, sans-serif">
-      <tspan x="60" dy="0">
-        • Coursework: Operating Systems, iOS Programming, Cybersecurity,
-        Algorithms, Multicore Programming
-      </tspan>
-      <tspan x="60" dy="15">
-        • Honors: Gates Millennium Scholar (2015)
-      </tspan>
-    </text>
+        <div className="flex justify-between mb-2">
+          <h3 className="text-base font-bold">
+            New York University, College of Arts and Sciences
+          </h3>
+          <span className="text-sm">Aug. 2019</span>
+        </div>
+        <p className="text-sm mb-2">Bachelor of Arts in Computer Science</p>
+        <ul className="text-sm list-disc list-inside space-y-1">
+          <li>
+            Coursework: Operating Systems, iOS Programming, Cybersecurity,
+            Algorithms, Multicore Programming
+          </li>
+          <li>Honors: Gates Millennium Scholar (2015)</li>
+        </ul>
+      </div>
 
-    {/* Skills */}
-    <text
-      x="40"
-      y="900"
-      fontSize="16"
-      fontWeight="bold"
-      fontFamily="Arial, sans-serif"
-    >
-      Skills
-    </text>
-    <text x="40" y="920" fontSize="12" fontFamily="Arial, sans-serif">
-      Java, C++, Angular, React, Redux
-    </text>
-  </svg>
-);
+      {/* Skills */}
+      <div>
+        <h2 className="text-lg font-bold mb-4">Skills</h2>
+        <p className="text-sm">Java, C++, Angular, React, Redux</p>
+      </div>
+    </div>
+  );
+};
 
 export default Template3;
