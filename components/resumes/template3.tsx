@@ -1,16 +1,23 @@
 "use client";
 import { useUserDataStore } from "@/app/hooks/resumeStore";
 import { Skeleton } from "../ui/skeleton";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Template3 = () => {
   const { userData } = useUserDataStore();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <div className="w-[800px] bg-white p-8">
       {/* Header */}
       <div className="text-2xl font-bold mb-4">
-        {userData.name ? userData.name : <Skeleton className="h-6 w-64" />}
+        {userData.name
+          ? userData.name
+          : isMounted && <Skeleton className="h-6 w-64" />}
       </div>
 
       {/* Contact Info */}
@@ -26,7 +33,9 @@ const Template3 = () => {
       <div className="mb-8">
         <h2 className="text-lg font-bold mb-2">About</h2>
         <p className="text-sm">
-          {userData.about ? userData.about : <Skeleton className="h-12 w-80" />}
+          {userData.about
+            ? userData.about
+            : isMounted && <Skeleton className="h-12 w-80" />}
         </p>
       </div>
 

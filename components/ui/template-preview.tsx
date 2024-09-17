@@ -12,6 +12,7 @@ import {
 import { ScrollArea } from "./scroll-area";
 
 import { ReactNode } from "react";
+import Image from "next/image";
 
 interface TemplatePreviewProps {
   children: ReactNode;
@@ -28,10 +29,17 @@ export const TemplatePreview = ({ children }: TemplatePreviewProps) => {
           </DialogHeader>
           <div className="flex flex-wrap items-center justify-center gap-3">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-              <div
-                key={item}
-                className="bg-gray-300 h-40 w-40 rounded-lg"
-              ></div>
+              // <div
+              //   key={item}
+              //   className="bg-gray-300 h-40 w-40 rounded-lg"
+              // ></div>
+              <Image
+              src={`/images/rs1.svg`}
+              alt="Logo"
+              width={150}
+              height={150}
+              className="rounded-lg border border-gray-300"
+              ></Image>
             ))}
           </div>
         </ScrollArea>
